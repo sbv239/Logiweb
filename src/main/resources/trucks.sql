@@ -1,0 +1,14 @@
+insert into trucks (id, capacity, reg, shift, state, city_id) values (1, 10, 'LLN202', 12, false, 2);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (2, 18, 'LRM306', 9, true, 4);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (3, 20, 'RYS758', 9, false, 1);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (4, 27, 'MOP212', 10, true, 4);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (5, 25, 'EBN798', 6, true, 1);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (6, 16, 'PGM708', 5, true, 7);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (7, 30, 'VUP078', 5, false, 8);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (8, 14, 'WHW597', 11, false, 3);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (9, 7, 'VSS628', 10, false, 1);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (10, 9, 'AOI108', 10, false, 1);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (11, 20, 'PTU748', 12, true, 6);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (12, 24, 'TEC606', 7, false, 1);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (13, 16, 'KJL978', 12, true, 3);
+insert into trucks (id, capacity, reg, shift, state, city_id) values (14, 7, 'MUO295', 9, true, 6);

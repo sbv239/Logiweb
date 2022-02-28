@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<style>
+	body > section {width:800px; margin:30px auto }
+	span.badge.new:after{content:'';}
+</style>
+<head>
+</head>
+<body>
+<section>
+	<div id="autos" class="col s12">
+		<ul class="tabs">
+			<li class="tab col s3"><a href="#">Фуры</a></li>
+			<li class="tab col s3 "><a href="#">Заказы</a></li>
+			<li class="tab col s3"><a href="#">Города</a></li>
+		</ul>
+		<h1>Редактировать фуру</h1>
+	</div>
+	<div class="row">
+		<form class="col s12" th:action="@{/trucks/{id}(id=${truckEntity.getId()})}" th:object="${truckEntity}" method="post">
+			<div class="row">
+				<div class="input-field col s2">
+					<input id="capacity" th:field="*{capacity}" type="text" class="validate">
+					<label for="capacity">Грузоподъемность</label>
+				</div>
+				<div class="input-field col s2">
+					<input id="reg" th:field="*{reg}" type="text" class="validate">
+					<label for="reg" >Номер</label>
+				</div>
+				<div class="input-field col s2">
+					<input id="shift" th:field="*{shift}" type="text" class="validate">
+					<label for="shift">Смена водителя</label>
+				</div>
+				<div class="input-field col s4">
+					<select th:field="*{city.id}">
+						<option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}">Город</option>
+					</select>
+					<label>Город</label>
+				</div>
+				<div class="input-field col s4">
+					<select th:field="*{state}">
+						<option value="TRUE">Исправен</option>
+						<option value="FALSE">Неисправен</option>
+					</select>
+					<label>Состояние</label>
+				</div>
+
+				<div class="input-field col s2">
+					<button class="btn waves-effect waves-light btn-small" type="submit" name="action">Изменить</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+<script>
+	M.AutoInit();
+</script>
+</body>
+</html>

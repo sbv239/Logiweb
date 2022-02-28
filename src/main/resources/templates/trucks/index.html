@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<style>
+	body > section {width:800px; margin:30px auto }
+	span.badge.new:after{content:'';}
+</style>
+<head>
+</head>
+<body>
+<header class="Header"
+		th:replace="~{fragments/header :: head}"></header>
+<section>
+	<div id="autos" class="col s12">
+		<h1>Фуры</h1>
+		<div class="row">
+			<form class="col s12" th:action="@{/trucks/add}" th:object="${truckEntity}" method="post">
+				<div class="row">
+					<div class="input-field col s2">
+						<input id="capacity" th:field="*{capacity}" type="text" class="validate">
+						<label for="capacity">Грузоподъемность</label>
+					</div>
+					<div class="input-field col s2">
+						<input id="reg" th:field="*{reg}" type="text" class="validate">
+						<label for="reg" >Номер</label>
+					</div>
+					<div class="input-field col s2">
+						<input id="shift" th:field="*{shift}" type="text" class="validate">
+						<label for="shift">Смена водителя</label>
+					</div>
+					<div class="input-field col s4">
+						<select th:field="*{city.id}">
+							<option value="" disabled selected>Выберете город</option>
+							<option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}">Город</option>
+						</select>
+						<label>Город</label>
+					</div>
+					<div class="input-field col s2">
+						<button class="btn waves-effect waves-light btn-small" type="submit" name="action">Добавить новую фуру</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<table class="striped">
+			<thead>
+			<tr>
+				<th>Грузоподъемность</th>
+				<th>Номер</th>
+				<th>Смена водителя</th>
+				<th>Состояние</th>
+				<th>Текущий город</th>
+				<th>Действия</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="truck: ${truckList}">
+				<td th:text="${truck.capacity}">6 тонн</td>
+				<td th:text="${truck.reg}">Н745РК178</td>
+				<td th:text="${truck.shift}">
+					10 часов
+				</td>
+				<td><span th:if="${truck.state == 'TRUE'}" class="badge new">Исправен</span>
+					<span th:if="${truck.state == 'FALSE'}" class="badge new red">Неисправен</span></td>
+				<td th:text="${truck.city}">Тамбов</td>
+				<td>
+					<a th:href="@{/trucks/deleteTruck/{id}(id=${truck.id})}" class="red-text">Удалить</a>
+					<a th:href="@{/trucks/{id}/edit(id=${truck.id})}">Редактировать</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+<script>
+	M.AutoInit();
+</script>
+</body>
+</html>
