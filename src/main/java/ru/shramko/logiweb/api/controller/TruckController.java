@@ -14,7 +14,7 @@ import ru.shramko.logiweb.service.TruckService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/trucks")
+@RequestMapping("/crm/trucks")
 public class TruckController {
 
     private final TruckService truckService;
@@ -40,12 +40,12 @@ public class TruckController {
     @GetMapping("/deleteTruck/{id}")
     public String deleteTrucks(@PathVariable("id") int id) {
         truckService.deleteTruck(id);
-        return "redirect:/trucks/all";
+        return "redirect:/crm/trucks/all";
     }
     @PostMapping(value = "/add")
     public String newTruck(TruckEntity truckEntity, BindingResult bindingResult, Model model) {
         truckService.addTruck(truckEntity);
-        return "redirect:/trucks/all";
+        return "redirect:/crm/trucks/all";
     }
     @GetMapping("/{id}/edit")
     public String editTruck(Model model, @PathVariable("id") int id) {
@@ -55,7 +55,7 @@ public class TruckController {
     @PostMapping("/{id}")
     public String updateTruck(@ModelAttribute("truckEntity") TruckEntity truckEntity, @PathVariable("id") int id) {
         truckService.updateTruck(truckEntity);
-        return "redirect:/trucks/all";
+        return "redirect:/crm/trucks/all";
     }
     @GetMapping("/all")
     public String trucksPage(TruckEntity truckEntity) {

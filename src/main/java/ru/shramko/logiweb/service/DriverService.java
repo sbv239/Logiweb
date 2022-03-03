@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.DriverRepository;
 import ru.shramko.logiweb.model.Driver;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
