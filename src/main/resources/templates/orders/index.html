@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<style>
+	body > section {width:800px; margin:30px auto }
+	span.badge.new:after{content:'';}
+</style>
+<head>
+</head>
+<body>
+<header class="Header"
+		th:replace="~{fragments/header :: head}"></header>
+<section>
+	<div id="autos" class="col s12">
+		<h1>Заказы</h1>
+		<div class="row">
+			<form class="col s12" th:action="@{/crm/orders/add}" th:object="${point}" method="post">
+				<div class="row">
+					<div class="input-field col s4">
+						<select th:field="*{cargo}">
+							<option value="" disabled selected>Выберете груз</option>
+							<option th:each="cargo : ${cargoList}" th:value="${cargo.id}" th:text="${cargo.name}" th:if="${cargo.status == 'Подготовлен'}"></option>
+						</select>
+						<label>Выберете груз</label>
+					</div>
+					<div class="input-field col s4">
+						<select th:field="*{city}">
+							<option value="" disabled selected>Город доставки</option>
+							<option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}">Город доставки</option>
+						</select>
+						<label>Город доставки</label>
+					</div>
+					<div class="input-field col s4">
+						<button class="btn waves-effect waves-light btn-small" type="submit" name="action">Добавить заказ</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="row">
+			<h2>Заказы</h2>
+			<table class="highlight responsive-table">
+				<thead>
+				<tr>
+					<th>Номер заказа</th>
+					<th>Статус</th>
+					<th>Фура</th>
+					<th>Водитель</th>
+					<th>Число маршрутных точек</th>
+					<th>Действия</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="order: ${orderList}">
+					<td th:text="${order.number}"></td>
+					<td>Статус</td>
+					<td th:text="${order?.truck?.reg}">Фура</td>
+					<td>Водитель</td>
+					<td th:text="${#lists.size(order.pointList)}">Число маршрутных точек</td>
+					<td><a th:if= "${order.truck == null}" th:href="@{/crm/orders/settruck/{id}(id=${order.id})}">Назначить фуру</a></td>
+
+				</tr>
+				</tbody>
+			</table>
+		</div>
+			<h2>Грузы</h2>
+			<table class="highlight responsive-table">
+				<thead>
+				<tr>
+					<th>Номер</th>
+					<th>Название</th>
+					<th>Вес</th>
+					<th>Статус</th>
+					<th>Текущий город</th>
+					<th>Город доставки</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="cargo: ${cargoList}">
+					<td th:text="${cargo.number}"></td>
+					<td th:text="${cargo.name}"></td>
+					<td th:text="${cargo.weight}"></td>
+					<td><span th:if="${cargo.status == 'Доставлен'}" class="badge new">Доставлен</span>
+						<span th:if="${cargo.status == 'Подготовлен'}" class="badge new yellow">Подготовлен</span>
+						<span th:if="${cargo.status == 'Отгружен'}" class="badge new blue">Отгружен</span></td>
+					<td th:text="${cargo.startCity}">Тамбов</td>
+					<td th:if="${cargo.endCity != null}" th:text="${cargo.endCity}"></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+<script>
+	M.AutoInit();
+</script>
+</body>
+</html>

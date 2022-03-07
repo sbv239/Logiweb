@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.shramko.logiweb.dao.entity.CityEntity;
-import ru.shramko.logiweb.model.Driver;
+import ru.shramko.logiweb.dao.entity.City;
+import ru.shramko.logiweb.api.model.Driver;
 import ru.shramko.logiweb.service.CityService;
 import ru.shramko.logiweb.service.DriverService;
 
@@ -27,7 +27,7 @@ public class DriverController {
     }
 
     @ModelAttribute("cityList")
-    public List<CityEntity> getCities(){
+    public List<City> getCities(){
         return cityService.getCityList();
     }
 
@@ -36,14 +36,14 @@ public class DriverController {
         return driverService.getDriverDataList();
     }
 
-    @GetMapping("/all")
-    public String driversPage(Driver driver) {
+    @GetMapping("/")
+    public String driversMainPage(Driver driver) {
         return "/drivers/index.html";
     }
 
     @PostMapping(value = "/add")
     public String newTruck(Driver driver) {
         driverService.addDriver(driver);
-        return "redirect:/crm/drivers/all";
+        return "redirect:/crm/drivers/";
     }
 }

@@ -1,4 +1,4 @@
-package ru.shramko.logiweb.api;
+package ru.shramko.logiweb.api.config;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +24,7 @@ public class LogiwebAuthenticationSuccessHandler implements AuthenticationSucces
 
         boolean hasManagerRole = false;
         boolean hasDriverRole = false;
+        boolean hasAdminRole = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_MANAGER")) {
@@ -32,15 +33,19 @@ public class LogiwebAuthenticationSuccessHandler implements AuthenticationSucces
             } else if (grantedAuthority.getAuthority().equals("ROLE_DRIVER")) {
                 hasDriverRole = true;
                 break;
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+                hasAdminRole = true;
+                break;
             }
         }
-
-        if (hasManagerRole) {
-            redirectStrategy.sendRedirect(request, response, "/crm/trucks/all");
-        } else if (hasDriverRole) {
-            redirectStrategy.sendRedirect(request, response, "/profile");
-        } else {
-            throw new IllegalStateException();
-        }
+            if (hasManagerRole) {
+                redirectStrategy.sendRedirect(request, response, "/crm/trucks/");
+            } else if (hasDriverRole) {
+                redirectStrategy.sendRedirect(request, response, "/profile/");
+            } else if (hasAdminRole) {
+                redirectStrategy.sendRedirect(request, response, "/h2-console");
+            }else {
+                throw new IllegalStateException();
+            }
     }
 }

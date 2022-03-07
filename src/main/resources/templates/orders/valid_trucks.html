@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<style>
+    body > section {width:800px; margin:30px auto }
+    span.badge.new:after{content:'';}
+</style>
+<head>
+</head>
+<body>
+<header class="Header"
+        th:replace="~{fragments/header :: head}"></header>
+<section>
+    <div id="autos" class="col s12">
+        <h1 th:text="${order.number}">Назначить фуру на заказ</h1>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Грузоподъемность</th>
+                <th>Номер</th>
+                <th>Смена водителя</th>
+                <th>Состояние</th>
+                <th>Текущий город</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="truck: ${truckList}">
+                <td th:text="${truck.capacity}">6 тонн</td>
+                <td th:text="${truck.reg}">Н745РК178</td>
+                <td th:text="${truck.shift}">
+                    10 часов
+                </td>
+                <td><span th:if="${truck.state == 'true'}" class="badge new">Исправен</span>
+                    <span th:if="${truck.state == 'false'}" class="badge new red">Неисправен</span></td>
+                <td th:text="${truck.city}">Тамбов</td>
+                <td>
+                    <a th:href="@{/crm/orders/settruck/{orderid}/{truckid}(orderid=${order.id}, truckid=${truck.id})}" class="red-text">Назначить</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<script>
+    M.AutoInit();
+</script>
+</body>
+</html>

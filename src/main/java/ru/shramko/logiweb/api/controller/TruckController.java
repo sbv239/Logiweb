@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.shramko.logiweb.dao.entity.CityEntity;
-import ru.shramko.logiweb.dao.entity.TruckEntity;
+import ru.shramko.logiweb.dao.entity.City;
+import ru.shramko.logiweb.dao.entity.Truck;
 import ru.shramko.logiweb.service.CityService;
 import ru.shramko.logiweb.service.TruckService;
 
@@ -28,24 +28,24 @@ public class TruckController {
     }
 
     @ModelAttribute("truckList")
-    public List<TruckEntity> getTrucks(){
+    public List<Truck> getTrucks(){
         return truckService.getTruckDataList();
     }
 
     @ModelAttribute("cityList")
-    public List<CityEntity> getCities(){
+    public List<City> getCities(){
         return cityService.getCityList();
     }
 
     @GetMapping("/deleteTruck/{id}")
     public String deleteTrucks(@PathVariable("id") int id) {
         truckService.deleteTruck(id);
-        return "redirect:/crm/trucks/all";
+        return "redirect:/crm/trucks/";
     }
     @PostMapping(value = "/add")
-    public String newTruck(TruckEntity truckEntity, BindingResult bindingResult, Model model) {
-        truckService.addTruck(truckEntity);
-        return "redirect:/crm/trucks/all";
+    public String newTruck(Truck truck, BindingResult bindingResult, Model model) {
+        truckService.addTruck(truck);
+        return "redirect:/crm/trucks/";
     }
     @GetMapping("/{id}/edit")
     public String editTruck(Model model, @PathVariable("id") int id) {
@@ -53,12 +53,12 @@ public class TruckController {
         return "/trucks/edit.html";
     }
     @PostMapping("/{id}")
-    public String updateTruck(@ModelAttribute("truckEntity") TruckEntity truckEntity, @PathVariable("id") int id) {
-        truckService.updateTruck(truckEntity);
-        return "redirect:/crm/trucks/all";
+    public String updateTruck(@ModelAttribute("truckEntity") Truck truck, @PathVariable("id") int id) {
+        truckService.updateTruck(truck);
+        return "redirect:/crm/trucks/";
     }
-    @GetMapping("/all")
-    public String trucksPage(TruckEntity truckEntity) {
+    @GetMapping("/")
+    public String trucksPage(Truck truck) {
         return "/trucks/index.html";
     }
 }

@@ -18,7 +18,7 @@
 	<div id="autos" class="col s12">
 		<h1>Фуры</h1>
 		<div class="row">
-			<form class="col s12" th:action="@{/trucks/add}" th:object="${truckEntity}" method="post">
+			<form class="col s12" th:action="@{/trucks/add}" th:object="${truck}" method="post">
 				<div class="row">
 					<div class="input-field col s2">
 						<input id="capacity" th:field="*{capacity}" type="text" class="validate">
@@ -50,7 +50,7 @@
 			<tr>
 				<th>Грузоподъемность</th>
 				<th>Номер</th>
-				<th>Смена водителя</th>
+				<th>Смена</th>
 				<th>Состояние</th>
 				<th>Текущий город</th>
 				<th>Действия</th>
@@ -60,12 +60,10 @@
 			<tr th:each="truck: ${truckList}">
 				<td th:text="${truck.capacity}">6 тонн</td>
 				<td th:text="${truck.reg}">Н745РК178</td>
-				<td th:text="${truck.shift}">
-					10 часов
-				</td>
-				<td><span th:if="${truck.state == 'TRUE'}" class="badge new">Исправен</span>
-					<span th:if="${truck.state == 'FALSE'}" class="badge new red">Неисправен</span></td>
-				<td th:text="${truck.city}">Тамбов</td>
+				<td th:text="${truck.shift}">10 часов</td>
+				<td><span th:if="${truck.state == 'true'}" class="badge new">Исправен</span>
+					<span th:if="${truck.state == 'false'}" class="badge new red">Неисправен</span></td>
+				<td th:text="${truck.city}"></td>
 				<td>
 					<a th:href="@{/trucks/deleteTruck/{id}(id=${truck.id})}" class="red-text">Удалить</a>
 					<a th:href="@{/trucks/{id}/edit(id=${truck.id})}">Редактировать</a>

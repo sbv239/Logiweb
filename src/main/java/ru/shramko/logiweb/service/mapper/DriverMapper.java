@@ -1,7 +1,7 @@
-package ru.shramko.logiweb.service;
+package ru.shramko.logiweb.service.mapper;
 
 import ru.shramko.logiweb.dao.entity.DriverEntity;
-import ru.shramko.logiweb.model.Driver;
+import ru.shramko.logiweb.api.model.Driver;
 
 import java.util.ArrayList;
 import java.util.List;

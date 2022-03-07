@@ -28,14 +28,14 @@ public class DriverEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "city_id")
-    private CityEntity city;
+    private City city;
 
     @OneToOne
     @JoinColumn(name = "truck_id")
-    private TruckEntity truckId;
+    private Truck truckId;
 
     @ManyToOne
     @JoinColumn(name="order_id")
-    private OrderEntity order_id;
+    private Order order_id;
 
 }

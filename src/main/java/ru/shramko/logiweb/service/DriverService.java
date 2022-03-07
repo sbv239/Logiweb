@@ -3,7 +3,8 @@ package ru.shramko.logiweb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.DriverRepository;
-import ru.shramko.logiweb.model.Driver;
+import ru.shramko.logiweb.api.model.Driver;
+import ru.shramko.logiweb.service.mapper.DriverMapper;
 
 import java.util.List;
 

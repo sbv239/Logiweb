@@ -1,15 +1,13 @@
 package ru.shramko.logiweb.dao.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cities")
-@Getter @Setter @NoArgsConstructor
-public class CityEntity extends AbstractEntity {
+@Data
+public class City extends AbstractEntity {
 
     @Column(name = "name")
     private String name;

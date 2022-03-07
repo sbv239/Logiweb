@@ -4,15 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity
-@Data
+@Entity @Data
 @Table(name = "person")
-public class PersonEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Integer id;
+public class PersonEntity extends AbstractEntity {
 
     @Column(name = "login")
     private String login;
