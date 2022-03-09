@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name ="drivers")
 @Getter @Setter @NoArgsConstructor
-public class DriverEntity extends AbstractEntity {
+public class Driver extends AbstractEntity {
 
     @Column(name = "first_name")
     private String firstName;
@@ -18,7 +18,7 @@ public class DriverEntity extends AbstractEntity {
     private String lastName;
 
     @Column(name = "number")
-    private Integer number;
+    private String number;
 
     @Column(name = "hours")
     private Integer hours;
@@ -32,10 +32,10 @@ public class DriverEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "truck_id")
-    private Truck truckId;
+    private Truck truck;
 
     @ManyToOne
     @JoinColumn(name="order_id")
-    private Order order_id;
+    private Order order;
 
 }

@@ -3,10 +3,7 @@ package ru.shramko.logiweb.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.shramko.logiweb.dao.CargoRepository;
-import ru.shramko.logiweb.dao.OrderRepository;
-import ru.shramko.logiweb.dao.PointRepository;
-import ru.shramko.logiweb.dao.TruckRepository;
+import ru.shramko.logiweb.dao.*;
 import ru.shramko.logiweb.dao.entity.*;
 
 import java.text.DateFormat;
@@ -22,13 +19,16 @@ public class OrderService {
     private final PointRepository pointRepository;
     private final CargoRepository cargoRepository;
     private final TruckRepository truckRepository;
+    private final DriverRepository driverRepository;
 
     @Autowired
-    public OrderService(OrderRepository orderRepository, PointRepository pointRepository, CargoRepository cargoRepository, TruckRepository truckRepository) {
+    public OrderService(OrderRepository orderRepository, PointRepository pointRepository,
+                        CargoRepository cargoRepository, TruckRepository truckRepository, DriverRepository driverRepository) {
         this.orderRepository = orderRepository;
         this.pointRepository = pointRepository;
         this.cargoRepository = cargoRepository;
         this.truckRepository = truckRepository;
+        this.driverRepository = driverRepository;
     }
 
     public void addOrder(Point point) {
@@ -41,6 +41,7 @@ public class OrderService {
 
         order.setStartCity(cargo.getStartCity());
         order.setStatus("Выполняется");
+        order.setEndCity(endCity);
         orderRepository.save(order);
 
         Point endPoint = new Point(cargo, "выгрузка", order, endCity);
@@ -58,7 +59,7 @@ public class OrderService {
 
     private String generateNumber(Order order) {
         DateFormat df = new SimpleDateFormat("dd-MM-yy");
-        return "" + df.format(new Date()) + "-" + (int)(1000 * Math.random());
+        return "" + df.format(new Date()) + "-" + (int) (1000 * Math.random());
     }
 
     public List<Order> getOrderList() {
@@ -76,7 +77,8 @@ public class OrderService {
             }
         }
 
-        return truckRepository.findAllByCityAndStateAndOrderIsNullAndCapacityIsGreaterThan(order.getStartCity(), "true", weight);
+        return truckRepository
+                .findAllByCityAndStateAndOrderIsNullAndCapacityIsGreaterThan(order.getStartCity(), "true", weight);
     }
 
     public Order getOrder(int id) {
@@ -88,9 +90,17 @@ public class OrderService {
         Truck truck = truckRepository.getById(truckId);
         order.setTruck(truck);
         truck.setOrder(order);
-        System.out.println(truck);
-        System.out.println(order);
         orderRepository.save(order);
         truckRepository.save(truck);
+    }
+
+    public void setDriverToOrder(int orderId, int driverId) {
+        Order order = orderRepository.getById(orderId);
+        Driver driver = driverRepository.getById(driverId);
+        Truck truck = truckRepository.getById(order.getTruck().getId());
+        driver.setOrder(order);
+        driver.setTruck(truck);
+        driver.setStatus("В смене");
+        driverRepository.save(driver);
     }
 }

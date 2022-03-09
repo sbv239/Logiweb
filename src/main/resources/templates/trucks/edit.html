@@ -22,7 +22,7 @@
 		<h1>Редактировать фуру</h1>
 	</div>
 	<div class="row">
-		<form class="col s12" th:action="@{/trucks/{id}(id=${truck.getId()})}" th:object="${truck}" method="post">
+		<form class="col s12" th:action="@{/crm/trucks/{id}(id=${truck.getId()})}" th:object="${truck}" method="post">
 			<div class="row">
 				<div class="input-field col s2">
 					<input id="capacity" th:field="*{capacity}" type="text" class="validate">

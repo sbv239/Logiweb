@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.shramko.logiweb.dao.entity.City;
-import ru.shramko.logiweb.api.model.Driver;
+import ru.shramko.logiweb.dao.entity.Driver;
 import ru.shramko.logiweb.service.CityService;
 import ru.shramko.logiweb.service.DriverService;
 

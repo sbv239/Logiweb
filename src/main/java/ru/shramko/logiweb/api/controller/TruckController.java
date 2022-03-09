@@ -27,11 +27,6 @@ public class TruckController {
         this.cityService = cityService;
     }
 
-    @ModelAttribute("truckList")
-    public List<Truck> getTrucks(){
-        return truckService.getTruckDataList();
-    }
-
     @ModelAttribute("cityList")
     public List<City> getCities(){
         return cityService.getCityList();
@@ -49,16 +44,17 @@ public class TruckController {
     }
     @GetMapping("/{id}/edit")
     public String editTruck(Model model, @PathVariable("id") int id) {
-        model.addAttribute("truckEntity", truckService.getTruckData(id));
+        model.addAttribute("truck", truckService.getTruckData(id));
         return "/trucks/edit.html";
     }
     @PostMapping("/{id}")
-    public String updateTruck(@ModelAttribute("truckEntity") Truck truck, @PathVariable("id") int id) {
+    public String updateTruck(@ModelAttribute("truck") Truck truck, @PathVariable("id") int id) {
         truckService.updateTruck(truck);
         return "redirect:/crm/trucks/";
     }
     @GetMapping("/")
-    public String trucksPage(Truck truck) {
+    public String trucksPage(Model model, Truck truck) {
+        model.addAttribute("truckList", truckService.getTruckDataList());
         return "/trucks/index.html";
     }
 }

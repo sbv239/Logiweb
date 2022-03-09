@@ -60,7 +60,10 @@
 					<td th:text="${order?.truck?.reg}">Фура</td>
 					<td>Водитель</td>
 					<td th:text="${#lists.size(order.pointList)}">Число маршрутных точек</td>
-					<td><a th:if= "${order.truck == null}" th:href="@{/crm/orders/settruck/{id}(id=${order.id})}">Назначить фуру</a></td>
+					<td>
+						<a th:if= "${order.truck == null}" th:href="@{/crm/orders/settruck/{id}(id=${order.id})}">Назначить фуру</a>
+						<a th:if= "${order.truck != null}" th:href="@{/crm/orders/setdriver/{id}(id=${order.id})}">Назначить водителя</a>
+					</td>
 
 				</tr>
 				</tbody>

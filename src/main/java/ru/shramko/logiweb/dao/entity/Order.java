@@ -26,6 +26,13 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "start_city_id")
     private City startCity;
 
+    @OneToOne
+    @JoinColumn(name = "end_city_id")
+    private City endCity;
+
+    @OneToMany(mappedBy="order")
+    private List<Driver> driverList;
+
     @Override
     public String toString() {
         String truckReg;

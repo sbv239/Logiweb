@@ -65,8 +65,8 @@
 					<span th:if="${truck.state == 'false'}" class="badge new red">Неисправен</span></td>
 				<td th:text="${truck.city}"></td>
 				<td>
-					<a th:href="@{/trucks/deleteTruck/{id}(id=${truck.id})}" class="red-text">Удалить</a>
-					<a th:href="@{/trucks/{id}/edit(id=${truck.id})}">Редактировать</a>
+					<a th:href="@{/crm/trucks/deleteTruck/{id}(id=${truck.id})}" class="red-text">Удалить</a>
+					<a th:href="@{/crm/trucks/{id}/edit(id=${truck.id})}">Редактировать</a>
 				</td>
 			</tr>
 			</tbody>
