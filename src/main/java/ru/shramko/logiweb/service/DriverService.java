@@ -39,12 +39,12 @@ public class DriverService {
         return driverRepository.findAll();
     }
 
-    public List<Driver> getDriverForOrder(int id) {
+    public List<Driver> getDriversForOrder(int id) {
 
         Order order = orderRepository.getById(id);
         Truck truck = truckRepository.getById(order.getTruck().getId());
-        City startCity = cityRepository.getById(order.getStartCity().getId());
-        City endCity = cityRepository.getById(order.getEndCity().getId());
+        City startCity = order.getStartCity();
+        City endCity = order.getEndCity();
 
         int workingHoursInCurrentMonth = truck.getShift() * Utils.daysLeft();
         int orderTimeToComplete = 12 * Math.abs(startCity.getXCoord() - endCity.getXCoord() + startCity.getYCoord() - endCity.getYCoord());

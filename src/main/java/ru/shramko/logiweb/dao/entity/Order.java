@@ -22,11 +22,11 @@ public class Order extends AbstractEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy="order")
     private List<Point> pointList;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "start_city_id")
     private City startCity;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "end_city_id")
     private City endCity;
 

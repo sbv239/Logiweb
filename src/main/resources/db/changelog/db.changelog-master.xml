@@ -7,8 +7,12 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <include file="/db/changelog/liquibase-outputChangeLog-init.xml"/>
 
-<!--    <include file="src/main/resources/cities.sql"/>-->
-<!--    <include file="src/main/resources/trucks.sql" />-->
+        <include file="data/cities.sql"/>
+        <include file="data/cargos.sql"/>
+        <include file="data/drivers.sql"/>
+        <include file="data/trucks.sql"/>
+        <include file="data/users.sql"/>
 
 </databaseChangeLog>

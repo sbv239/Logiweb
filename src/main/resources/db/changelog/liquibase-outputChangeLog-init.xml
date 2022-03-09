@@ -1,0 +1,130 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="Boris (generated)" id="1646817968175-1">
+        <createTable tableName="cargos">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="cargos_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="weight" type="FLOAT8"/>
+            <column name="end_city_id" type="INTEGER"/>
+            <column name="order_id" type="INTEGER"/>
+            <column name="city_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-2">
+        <createTable tableName="cities">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="cities_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="x_coord" type="INTEGER"/>
+            <column name="y_coord" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-3">
+        <createTable tableName="drivers">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="drivers_pkey"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="hours" type="INTEGER"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="city_id" type="INTEGER"/>
+            <column name="order_id" type="INTEGER"/>
+            <column name="truck_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-4">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="orders_pkey"/>
+            </column>
+            <column name="number" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="end_city_id" type="INTEGER"/>
+            <column name="start_city_id" type="INTEGER"/>
+            <column name="truck_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-5">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="person_pkey"/>
+            </column>
+            <column name="login" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="role" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-6">
+        <createTable tableName="points">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="points_pkey"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="cargo_id" type="INTEGER"/>
+            <column name="city_id" type="INTEGER"/>
+            <column name="order_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-7">
+        <createTable tableName="trucks">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="trucks_pkey"/>
+            </column>
+            <column name="capacity" type="FLOAT8"/>
+            <column name="reg" type="VARCHAR(255)"/>
+            <column name="shift" type="INTEGER"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="city_id" type="INTEGER"/>
+            <column name="order_id" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-8">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="points" constraintName="fk1km3xtenqwcg99dn0y1h9ldc2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-9">
+        <addForeignKeyConstraint baseColumnNames="cargo_id" baseTableName="points" constraintName="fk2fwanq3bjo9x0oulj7ilfjsbi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cargos" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-10">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="drivers" constraintName="fk4abe30nnxuqan9cbma7qvin1n" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-11">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="drivers" constraintName="fk5v48wwjn0ogrijw4xyne5o36h" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-12">
+        <addForeignKeyConstraint baseColumnNames="truck_id" baseTableName="orders" constraintName="fk758c45uk0feioegbgnsyf2vth" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="trucks" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-13">
+        <addForeignKeyConstraint baseColumnNames="truck_id" baseTableName="drivers" constraintName="fk909fr4pb68wwdgm65i47w3a9x" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="trucks" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-14">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="cargos" constraintName="fk96wcbtogivn389y7nwu7743f6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-15">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="points" constraintName="fkftxdi9ib7xln9fwr2ha5bxm9y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-16">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="trucks" constraintName="fkg5rqm5nggydd5gy7ccodgs5x9" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orders" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-17">
+        <addForeignKeyConstraint baseColumnNames="end_city_id" baseTableName="orders" constraintName="fkn7ffor9862y7fdgwijx19w4rn" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-18">
+        <addForeignKeyConstraint baseColumnNames="start_city_id" baseTableName="orders" constraintName="fkp88w7wq7ojb5uatr7gkoi3ejp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-19">
+        <addForeignKeyConstraint baseColumnNames="end_city_id" baseTableName="cargos" constraintName="fkqi8ympg0c4x7n54hpf65niqxf" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-20">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="trucks" constraintName="fkrwuysag2j6j90bi1783hhg43g" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+    <changeSet author="Boris (generated)" id="1646817968175-21">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="cargos" constraintName="fkswwlrbcu71jhp7ugc3auyt4l0" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cities" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

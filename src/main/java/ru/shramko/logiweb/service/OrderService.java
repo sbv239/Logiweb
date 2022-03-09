@@ -66,7 +66,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<Truck> getTruckForOrder(int id) {
+    public List<Truck> getTrucksForOrder(int id) {
         Order order = orderRepository.getById(id);
 
         Double weight = 0.0;

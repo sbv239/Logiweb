@@ -62,7 +62,7 @@ public class OrderController {
     }
     @GetMapping("/settruck/{id}")
     public String setTruck(Model model, @PathVariable("id") int id) {
-        model.addAttribute("truckList", orderService.getTruckForOrder(id));
+        model.addAttribute("truckList", orderService.getTrucksForOrder(id));
         model.addAttribute("order", orderService.getOrder(id));
         return "/orders/valid_trucks.html";
     }
@@ -75,7 +75,7 @@ public class OrderController {
 
     @GetMapping("/setdriver/{id}")
     public String setDriver(Model model, @PathVariable("id") int id) {
-        model.addAttribute("driverList", driverService.getDriverForOrder(id));
+        model.addAttribute("driverList", driverService.getDriversForOrder(id));
         model.addAttribute("order", orderService.getOrder(id));
         return "/orders/valid_drivers.html";
     }
