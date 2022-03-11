@@ -18,7 +18,7 @@
 	<div id="autos" class="col s12">
 		<h1>Водители</h1>
 		<div class="row">
-			<form class="col s12" th:action="@{/drivers/add}" th:object="${driver}" method="post">
+			<form class="col s12" th:action="@{/crm/drivers/add}" th:object="${driver}" method="post">
 				<div class="row">
 					<div class="input-field col s2">
 						<input id="name" th:field="*{firstName}" type="text" class="validate">
@@ -42,7 +42,7 @@
 						<label>Статус водителя</label>
 					</div>
 					<div class="input-field col s4">
-						<select th:field="*{city.id}">
+						<select th:field="*{city}">
 							<option value="" disabled selected>Выберете город</option>
 							<option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}">Текущий город</option>
 						</select>

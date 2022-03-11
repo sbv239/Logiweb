@@ -38,4 +38,24 @@ public class Driver extends AbstractEntity {
     @JoinColumn(name="order_id")
     private Order order;
 
+    @Override
+    public String toString() {
+
+        String orderNum;
+
+        if (order == null) {
+            orderNum = " ";
+        } else {
+            orderNum = " order=" + order.getNumber();
+        }
+
+        return "Driver{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", number='" + number + '\'' +
+                ", hours=" + hours +
+                ", status='" + status + '\'' +
+                ", city=" + city +
+                orderNum + '}';
+    }
 }

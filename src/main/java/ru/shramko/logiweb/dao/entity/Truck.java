@@ -35,17 +35,16 @@ public class Truck extends AbstractEntity {
         String orderNum;
 
         if (order == null) {
-            orderNum = "-";
+            orderNum = " ";
         } else {
-            orderNum = order.getNumber();
+            orderNum = " order=" + order.getNumber();
         }
         return "Truck{" +
                 "reg='" + reg + '\'' +
                 ", shift=" + shift +
                 ", capacity=" + capacity +
                 ", state='" + state + '\'' +
-                ", city=" + city.getName() +
-                ", order=" + orderNum +
-                '}';
+                ", city=" + city +
+                orderNum +'}';
     }
 }

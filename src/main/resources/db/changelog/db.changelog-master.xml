@@ -15,4 +15,6 @@
         <include file="data/trucks.sql"/>
         <include file="data/users.sql"/>
 
+        <include file="data/statements.sql"/>
+
 </databaseChangeLog>

@@ -1,5 +1,6 @@
 package ru.shramko.logiweb.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.entity.Truck;
@@ -8,6 +9,7 @@ import ru.shramko.logiweb.dao.TruckRepository;
 import java.util.List;
 
 @Service
+@Slf4j
 public class TruckService {
 
     private TruckRepository truckRepository;
@@ -26,8 +28,9 @@ public class TruckService {
     }
 
     public void addTruck(Truck truck) {
-        truck.setState("TRUE");
+        truck.setState("true");
         truckRepository.save(truck);
+        log.info("New truck was added: " + truck);
     }
 
     public Truck getTruckData(int id) {
@@ -36,5 +39,6 @@ public class TruckService {
 
     public void updateTruck(Truck truck) {
         truckRepository.save(truck);
+        log.info("Truck was updated: " + truck);
     }
 }

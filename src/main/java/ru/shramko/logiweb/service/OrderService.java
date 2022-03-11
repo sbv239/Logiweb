@@ -55,6 +55,10 @@ public class OrderService {
         cargo.setStatus("Отгружен");
         cargo.setEndCity(endCity);
         cargoRepository.save(cargo);
+
+        log.info("Создан заказ №" + order.getNumber() + ": Начальная точка: "
+                + order.getStartCity() + ", конечная точка: " + order.getEndCity()
+                + ", суммарный груз: " + cargo.getWeight());
     }
 
     private String generateNumber(Order order) {

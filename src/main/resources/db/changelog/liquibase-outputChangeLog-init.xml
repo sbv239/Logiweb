@@ -74,7 +74,7 @@
     </changeSet>
     <changeSet author="Boris (generated)" id="1646817968175-7">
         <createTable tableName="trucks">
-            <column autoIncrement="true" name="id" type="INTEGER">
+            <column autoIncrement="true" name="id" type="SERIAL">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="trucks_pkey"/>
             </column>
             <column name="capacity" type="FLOAT8"/>

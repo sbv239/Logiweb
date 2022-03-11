@@ -49,17 +49,17 @@
 					<th>Статус</th>
 					<th>Фура</th>
 					<th>Водитель</th>
-					<th>Число маршрутных точек</th>
 					<th>Действия</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr th:each="order: ${orderList}">
 					<td th:text="${order.number}"></td>
-					<td>Статус</td>
+					<td th:text="${order.status}">Статус</td>
 					<td th:text="${order?.truck?.reg}">Фура</td>
-					<td>Водитель</td>
-					<td th:text="${#lists.size(order.pointList)}">Число маршрутных точек</td>
+					<td>
+						<span th:each="driver : ${order.driverList}" th:text="${driver.firstName}"></span>
+					</td>
 					<td>
 						<a th:if= "${order.truck == null}" th:href="@{/crm/orders/settruck/{id}(id=${order.id})}">Назначить фуру</a>
 						<a th:if= "${order.truck != null}" th:href="@{/crm/orders/setdriver/{id}(id=${order.id})}">Назначить водителя</a>

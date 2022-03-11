@@ -18,7 +18,7 @@
 	<div id="autos" class="col s12">
 		<h1>Фуры</h1>
 		<div class="row">
-			<form class="col s12" th:action="@{/trucks/add}" th:object="${truck}" method="post">
+			<form class="col s12" th:action="@{/crm/trucks/add}" th:object="${truck}" method="post">
 				<div class="row">
 					<div class="input-field col s2">
 						<input id="capacity" th:field="*{capacity}" type="text" class="validate">
@@ -33,7 +33,7 @@
 						<label for="shift">Смена водителя</label>
 					</div>
 					<div class="input-field col s4">
-						<select th:field="*{city.id}">
+						<select th:field="*{city}">
 							<option value="" disabled selected>Выберете город</option>
 							<option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}">Город</option>
 						</select>

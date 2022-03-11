@@ -44,20 +44,15 @@ public class OrderController {
         return cargoService.getCargoList();
     }
 
-    @ModelAttribute("orderList")
-    public List<Order> getOrders(){
-        return orderService.getOrderList();
-    }
-
     @GetMapping("/")
-    public String ordersMainPage(Point point) {
+    public String ordersMainPage(Model model, Point point) {
+        model.addAttribute("orderList", orderService.getOrderList());
         return "/orders/index.html";
     }
 
     @PostMapping(value = "/add")
     public String newTruck(Point point) {
         orderService.addOrder(point);
-        log.info("Создан заказ на основе: " + point);
         return "redirect:/crm/orders/";
     }
     @GetMapping("/settruck/{id}")

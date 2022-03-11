@@ -41,7 +41,7 @@ public class Order extends AbstractEntity {
         } else {
             truckReg = truck.getReg();
         }
-        return "Order{" +
+        return "OrderDto{" +
                 "number='" + number + '\'' +
                 ", status=" + status +
                 ", truck=" + truckReg +

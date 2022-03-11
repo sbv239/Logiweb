@@ -1,5 +1,6 @@
 package ru.shramko.logiweb.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.CityRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class DriverService {
 
     private DriverRepository driverRepository;
@@ -33,10 +35,11 @@ public class DriverService {
     public void addDriver(Driver driver) {
         driver.setHours(0);
         driverRepository.save(driver);
+        log.info("New driver was added: " + driver);
     }
 
     public List<Driver> getDriverDataList() {
-        return driverRepository.findAll();
+       return driverRepository.findAll();
     }
 
     public List<Driver> getDriversForOrder(int id) {
@@ -46,12 +49,18 @@ public class DriverService {
         City startCity = order.getStartCity();
         City endCity = order.getEndCity();
 
-        int workingHoursInCurrentMonth = truck.getShift() * Utils.daysLeft();
         int orderTimeToComplete = 12 * Math.abs(startCity.getXCoord() - endCity.getXCoord() + startCity.getYCoord() - endCity.getYCoord());
+        log.info("Часов для выполнения заказа № " + order.getNumber() + ": " + orderTimeToComplete);
 
+        int workingHoursInCurrentMonth = truck.getShift() * Utils.daysLeft();
+        log.info("Для фуры, назначенной на заказ, осталось рабочих часов (с учетом смены " + truck.getShift() + ") в месяц: " + workingHoursInCurrentMonth);
 
-        return driverRepository.findAllByCityAndStatus(order.getStartCity(), "Отдых").stream()
+        List<Driver> driverList = driverRepository.findAllByCityAndStatus(order.getStartCity(), "Отдых").stream()
                 .filter(driver -> (176 - driver.getHours()) > Math.min(orderTimeToComplete, workingHoursInCurrentMonth))
                 .collect(Collectors.toList());
+
+        log.info("Найдено водителей: " + driverList.size());
+
+        return driverList;
     }
 }
