@@ -21,14 +21,12 @@ public class DriverService {
 
     private DriverRepository driverRepository;
     private OrderRepository orderRepository;
-    private CityRepository cityRepository;
     private TruckRepository truckRepository;
 
     @Autowired
-    public DriverService(DriverRepository driverRepository, OrderRepository orderRepository, CityRepository cityRepository, TruckRepository truckRepository) {
+    public DriverService(DriverRepository driverRepository, OrderRepository orderRepository, TruckRepository truckRepository) {
         this.driverRepository = driverRepository;
         this.orderRepository = orderRepository;
-        this.cityRepository = cityRepository;
         this.truckRepository = truckRepository;
     }
 

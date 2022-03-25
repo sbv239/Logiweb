@@ -1,14 +1,12 @@
 package ru.shramko.logiweb.dao.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name ="drivers")
-@Getter @Setter @NoArgsConstructor
+@Data
 public class Driver extends AbstractEntity {
 
     @Column(name = "first_name")

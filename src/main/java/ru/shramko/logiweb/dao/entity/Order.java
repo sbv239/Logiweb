@@ -13,7 +13,7 @@ public class Order extends AbstractEntity {
     private String number;
 
     @Column(name = "status")
-    private String status;
+    private String status = "Выполняется";
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "truck_id")
