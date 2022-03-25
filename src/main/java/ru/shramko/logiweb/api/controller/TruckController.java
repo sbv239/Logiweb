@@ -40,8 +40,12 @@ public class TruckController {
         return REDIRECT_TO_TRUCKLIST;
     }
     @PostMapping(value = "/add")
-    public String newTruck(Truck truck, BindingResult bindingResult, Model model) {
-        truckService.addTruck(truck);
+  
+    public String newTruck(Truck truck) {
+        String result = truckService.addTruck(truck);
+        if (result.equals("EMPTY FIELDS")) {
+            return REDIRECT_TO_TRUCKLIST + "?err=emptyfields";
+        }
         return REDIRECT_TO_TRUCKLIST;
     }
     @GetMapping("/{id}/edit")

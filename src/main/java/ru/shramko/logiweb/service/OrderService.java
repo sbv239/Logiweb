@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.*;
 import ru.shramko.logiweb.dao.entity.*;
-
+import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.DateFormat;
@@ -33,7 +33,7 @@ public class OrderService {
         this.truckRepository = truckRepository;
         this.driverRepository = driverRepository;
     }
-
+    @Transactional
     public void addOrder(Point point) {
         Cargo cargo = point.getCargo();
         City endCity = point.getCity();
@@ -96,6 +96,7 @@ public class OrderService {
         return orderRepository.getById(id);
     }
 
+    @Transactional
     public void setTruckToOrder(int orderId, int truckId) {
         Order order = orderRepository.getById(orderId);
         Truck truck = truckRepository.getById(truckId);
@@ -104,7 +105,7 @@ public class OrderService {
         orderRepository.save(order);
         truckRepository.save(truck);
     }
-
+    @Transactional
     public void setDriverToOrder(int orderId, int driverId) {
         Order order = orderRepository.getById(orderId);
         Driver driver = driverRepository.getById(driverId);

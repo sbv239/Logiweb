@@ -12,6 +12,7 @@ import ru.shramko.logiweb.dao.entity.Driver;
 import ru.shramko.logiweb.dao.entity.Order;
 import ru.shramko.logiweb.dao.entity.Truck;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ public class DriverService {
         this.orderRepository = orderRepository;
         this.truckRepository = truckRepository;
     }
-
+    @Transactional
     public void addDriver(Driver driver) {
         driver.setHours(0);
         driverRepository.save(driver);
