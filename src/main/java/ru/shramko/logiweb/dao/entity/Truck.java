@@ -1,7 +1,6 @@
 package ru.shramko.logiweb.dao.entity;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.*;
 

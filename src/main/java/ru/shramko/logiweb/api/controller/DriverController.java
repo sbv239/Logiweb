@@ -17,8 +17,8 @@ import java.util.List;
 @RequestMapping("/crm/drivers")
 public class DriverController {
 
-    private DriverService driverService;
-    private CityService cityService;
+    private final DriverService driverService;
+    private final CityService cityService;
 
     @Autowired
     public DriverController(DriverService driverService, CityService cityService) {
