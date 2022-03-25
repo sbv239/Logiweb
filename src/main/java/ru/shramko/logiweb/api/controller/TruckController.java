@@ -38,8 +38,11 @@ public class TruckController {
         return "redirect:/crm/trucks/";
     }
     @PostMapping(value = "/add")
-    public String newTruck(Truck truck, BindingResult bindingResult, Model model) {
-        truckService.addTruck(truck);
+    public String newTruck(Truck truck) {
+        String result = truckService.addTruck(truck);
+        if (result.equals("EMPTY FIELDS")) {
+            return "redirect:/crm/trucks/?err=emptyfields";
+        }
         return "redirect:/crm/trucks/";
     }
     @GetMapping("/{id}/edit")

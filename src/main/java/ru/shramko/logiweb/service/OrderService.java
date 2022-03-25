@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.*;
 import ru.shramko.logiweb.dao.entity.*;
 
+import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class OrderService {
         this.truckRepository = truckRepository;
         this.driverRepository = driverRepository;
     }
-
+    @Transactional
     public void addOrder(Point point) {
 
         Order order = new Order();
@@ -89,6 +90,7 @@ public class OrderService {
         return orderRepository.getById(id);
     }
 
+    @Transactional
     public void setTruckToOrder(int orderId, int truckId) {
         Order order = orderRepository.getById(orderId);
         Truck truck = truckRepository.getById(truckId);
@@ -97,7 +99,7 @@ public class OrderService {
         orderRepository.save(order);
         truckRepository.save(truck);
     }
-
+    @Transactional
     public void setDriverToOrder(int orderId, int driverId) {
         Order order = orderRepository.getById(orderId);
         Driver driver = driverRepository.getById(driverId);

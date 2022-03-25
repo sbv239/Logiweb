@@ -22,4 +22,10 @@ public class City extends AbstractEntity {
     public String toString() {
         return name;
     }
+
+    public City(String name, Integer xCoord, Integer yCoord) {
+        this.name = name;
+        this.xCoord = xCoord;
+        this.yCoord = yCoord;
+    }
 }
