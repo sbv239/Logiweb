@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.shramko.logiweb.dao.entity.Cargo;
 import ru.shramko.logiweb.dao.entity.City;
-import ru.shramko.logiweb.dao.entity.Order;
 import ru.shramko.logiweb.dao.entity.Point;
 import ru.shramko.logiweb.service.CityService;
 import ru.shramko.logiweb.service.CargoService;
@@ -25,6 +24,8 @@ public class OrderController {
     private final CargoService cargoService;
     private final OrderService orderService;
     private final DriverService driverService;
+
+    private static final String REDIRECT_TO_ORDERLIST = "redirect:/crm/orders/";
 
     @Autowired
     public OrderController(CityService cityService, CargoService cargoService, OrderService orderService, DriverService driverService) {
@@ -53,7 +54,7 @@ public class OrderController {
     @PostMapping(value = "/add")
     public String newTruck(Point point) {
         orderService.addOrder(point);
-        return "redirect:/crm/orders/";
+        return REDIRECT_TO_ORDERLIST;
     }
     @GetMapping("/settruck/{id}")
     public String setTruck(Model model, @PathVariable("id") int id) {
@@ -65,7 +66,7 @@ public class OrderController {
     @GetMapping("/settruck/{orderid}/{truckid}")
     public String setTruckToOrder(@PathVariable("orderid") int orderId, @PathVariable("truckid") int truckId) {
         orderService.setTruckToOrder(orderId, truckId);
-        return "redirect:/crm/orders/";
+        return REDIRECT_TO_ORDERLIST;
     }
 
     @GetMapping("/setdriver/{id}")
@@ -78,6 +79,6 @@ public class OrderController {
     @GetMapping("/setdriver/{orderid}/{driverid}")
     public String setDriverToOrder(@PathVariable("orderid") int orderId, @PathVariable("driverid") int driverId) {
         orderService.setDriverToOrder(orderId, driverId);
-        return "redirect:/crm/orders/";
+        return REDIRECT_TO_ORDERLIST;
     }
 }

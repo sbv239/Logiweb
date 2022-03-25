@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.shramko.logiweb.dao.*;
 import ru.shramko.logiweb.dao.entity.*;
-
 import javax.transaction.Transactional;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -33,15 +35,13 @@ public class OrderService {
     }
     @Transactional
     public void addOrder(Point point) {
-
-        Order order = new Order();
-        order.setNumber(generateNumber(order));
-
         Cargo cargo = point.getCargo();
         City endCity = point.getCity();
 
+        Order order = new Order();
+        order.setNumber(generateNumber());
+
         order.setStartCity(cargo.getStartCity());
-        order.setStatus("Выполняется");
         order.setEndCity(endCity);
         orderRepository.save(order);
 
@@ -62,9 +62,15 @@ public class OrderService {
                 + ", суммарный груз: " + cargo.getWeight());
     }
 
-    private String generateNumber(Order order) {
+    private String generateNumber() {
+        int suffix = 0;
+        try {
+            suffix = SecureRandom.getInstanceStrong().nextInt(1000);
+        } catch (NoSuchAlgorithmException e) {
+            log.error("Не получилось сгенерирваоть уникальный номер для заказа");
+        }
         DateFormat df = new SimpleDateFormat("dd-MM-yy");
-        return "" + df.format(new Date()) + "-" + (int) (1000 * Math.random());
+        return "" + df.format(new Date()) + "-" + suffix;
     }
 
     public List<Order> getOrderList() {

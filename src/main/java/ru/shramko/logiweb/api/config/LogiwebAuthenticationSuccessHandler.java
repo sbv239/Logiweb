@@ -29,13 +29,10 @@ public class LogiwebAuthenticationSuccessHandler implements AuthenticationSucces
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_MANAGER")) {
                 hasManagerRole = true;
-                break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_DRIVER")) {
                 hasDriverRole = true;
-                break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 hasAdminRole = true;
-                break;
             }
         }
             if (hasManagerRole) {

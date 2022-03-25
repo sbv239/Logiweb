@@ -20,6 +20,8 @@ public class TruckController {
     private final TruckService truckService;
     private final CityService cityService;
 
+    private static final String REDIRECT_TO_TRUCKLIST = "redirect:/crm/trucks/";
+
 
     @Autowired
     public TruckController(TruckService truckService, CityService cityService) {
@@ -35,15 +37,16 @@ public class TruckController {
     @GetMapping("/deleteTruck/{id}")
     public String deleteTrucks(@PathVariable("id") int id) {
         truckService.deleteTruck(id);
-        return "redirect:/crm/trucks/";
+        return REDIRECT_TO_TRUCKLIST;
     }
     @PostMapping(value = "/add")
+  
     public String newTruck(Truck truck) {
         String result = truckService.addTruck(truck);
         if (result.equals("EMPTY FIELDS")) {
-            return "redirect:/crm/trucks/?err=emptyfields";
+            return REDIRECT_TO_TRUCKLIST + "?err=emptyfields";
         }
-        return "redirect:/crm/trucks/";
+        return REDIRECT_TO_TRUCKLIST;
     }
     @GetMapping("/{id}/edit")
     public String editTruck(Model model, @PathVariable("id") int id) {
@@ -53,7 +56,7 @@ public class TruckController {
     @PostMapping("/{id}")
     public String updateTruck(@ModelAttribute("truck") Truck truck, @PathVariable("id") int id) {
         truckService.updateTruck(truck);
-        return "redirect:/crm/trucks/";
+        return REDIRECT_TO_TRUCKLIST;
     }
     @GetMapping("/")
     public String trucksPage(Model model, Truck truck) {
